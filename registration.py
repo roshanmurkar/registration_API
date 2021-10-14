@@ -1,3 +1,4 @@
+import json
 
 from flask import Flask, request, jsonify
 
@@ -17,7 +18,8 @@ def get_details():
     :return: json file of all details
     """
     output = db_query.select_all()
-    return jsonify(output)
+    print(output)
+    return jsonify({"response":"all users registration details","data":output})
 
 @app.route('/registration',methods=['POST'])
 def new_user():
@@ -29,7 +31,7 @@ def new_user():
     try:
         if len(user_data['name']) == 0:
             raise EmptyData
-        output = db_query.select_all()
+        output = connection.cursor.fetchall()
         for user in output:
             if user[0] == user_data['name'] and user[1] == user_data['password']:
                 return jsonify({"response": "user is already registered"},user_data)

@@ -1,5 +1,4 @@
 from utility import DBConnection
-
 connection = DBConnection
 
 class DBQuery:
@@ -10,8 +9,8 @@ class DBQuery:
         return output
 
     @staticmethod
-    def insert_data(uname,password):
-        connection.cursor.execute("INSERT INTO login_details(name,password)VALUES(%s,%s)",(uname,password))
+    def insert_data(uname, password):
+        connection.cursor.execute("INSERT INTO login_details(name,password)VALUES(%s,%s)", (uname, password))
         connection.conn.commit()
         return True
 
